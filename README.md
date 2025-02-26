@@ -1,50 +1,56 @@
-# React + TypeScript + Vite
+# Projeto: Circuit Coffee - (Criando uma aplicação React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Dev**: João Vicente de Oliveira Watanabe
 
-Currently, two official plugins are available:
+## Objetivo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este projeto consiste em criar uma aplicação com ReactJS, representando uma cafeteria ficticia,  o objetivo é componentizar a aplicação e usar CSS module.
 
-## Expanding the ESLint configuration
+## Layout
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+O design completo do projeto está disponível no arquivo (nome_do_arquivo) (Figma), que pode ser encontrado no repositório.
 
-- Configure the top-level `parserOptions` property like this:
+### Deixe sua FAKE API Rodando para que os endpoints funcionem
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+# Instalar JSON Server globalmente
+npm install -g json-server
+
+# Executar o servidor
+npx json-server db.json
+
+# Para rodar em uma porta específica
+npx json-server db.json --port 3333
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Endpoints:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- `/produtos`
+  - `GET`: pegar a lista de produtos
+- `/produtos/[id] `(trocar `[id]` pelo id do produto)
+  - `GET` => pegar os dados de um produto específico
+- `/carrinho`
+  - `GET`: pegar a lista de produtos no carrinho
+  - `POST`: cadastrar um item no carrinho
+- `/carrinho/[id]` (trocar `[id]` pelo id do item)
+  - `DELETE`: deletar um item do carrinho
+  - `PUT`: alterar os dados do item no carrinho
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+2. Fazer a integração com a API para substituir o array de produtos e o array de produtos no carrinho:
+
+- Home
+  - Obtenha a listagem de produtos no endopoint `GET /produtos`
+- Produto
+  - Obtenha os dados do produto específico no endpoint `GET /produtos[id]`
+  - Ao clicar em comprar, o produto deve ser adicionado no carrinho, use o endpoint `POST /carrinho`
+- carrinho:
+  - Obtenha a listagem de produtos do carrinho no endpoint `GET /carrinho`
+  - Delete um produto do carrinho usando o endpoint `DELETE /carrinho/[id]`
+  - Altere a quantidade de um produto do carrinho `PUT /carrinho/[id]`
+  - Exclua todos os itens do carrinho usando o endpoint `DELETE /carrinho/[id]`. Dica você pode usar um foreach para deletar todos.
+  - Calcule o subtotal, frete e valor total usando o endpoint `GET /carrinho`
+
+### Final to-do:
+1. Criar um Hook para gerenciar os estados de Carrinho
+2. Fazer o deploy da aplicação usando netlify
+
