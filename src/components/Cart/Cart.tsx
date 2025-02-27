@@ -15,6 +15,21 @@ export const Cart = () => {
         {/* item adicionado no carrinho */}
         <ItemCart />
       </section>
+      <footer className="cart-footer">
+        <div className="summary-cart">
+          <div className="summary-info">
+            <p>Subtotal</p>
+            <p>Entrega</p>
+            <h3>Total</h3>
+          </div>
+          <div className="summary-info-value">
+            <p>R$ 0,00</p>
+            <p>R$ 0,00</p>
+            <h3>R$ 0,00</h3>
+          </div>
+        </div>
+        <button className="cart-button">Finalizar compra</button>
+      </footer>
     </div>
   );
 };
